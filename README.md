@@ -51,11 +51,11 @@ Start the development server:
 uvicorn main:app --reload
 ```
 
-The API will be available at: `http://127.0.0.1:8000`
+The API will be available at: `https://grc-backend-dzop.onrender.com`
 
 ## API Documentation
 
-Visit `http://127.0.0.1:8000/docs` for interactive Swagger UI documentation.
+Visit `https://grc-backend-dzop.onrender.com` for interactive Swagger UI documentation.
 
 ## Key Endpoints
 
