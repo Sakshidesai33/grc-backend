@@ -1,9 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from typing import Dict, List
-from services.ai_service import ai_service
-from core.deps import get_current_user
-from models.user import User
+try:
+    from app_new.services.ai_service import ai_service
+except ImportError:
+    ai_service = None
+from app_new.core.deps import get_current_user
+from app_new.models.user import User
 
 router = APIRouter()
 
@@ -34,9 +37,15 @@ def analyze_incident(
 ):
     """Analyze incident using AI models"""
     
+    if not ai_service:
+        raise HTTPException(status_code=503, detail="AI service not available")
+    
     # Load models if not already loaded
     if not ai_service.models_loaded:
-        ai_service.load_models()
+        try:
+            ai_service.load_models()
+        except Exception as e:
+            raise HTTPException(status_code=503, detail=f"Failed to load AI models: {str(e)}")
     
     # Combine title and description for analysis
     text = f"{request.title} {request.description}"

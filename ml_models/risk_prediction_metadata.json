@@ -1,6 +1,0 @@
-{
-  "model_version": "1.0.0",
-  "mae": 1.0936565070926358,
-  "r2_score": 0.842,
-  "purpose": "Predict future incident counts by department"
-}

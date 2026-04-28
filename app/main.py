@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api import auth, incidents, ai, notifications
-from db.init_db import init_database
-from core.config import settings
+from app.api import auth, incidents, ai, notifications
+try:
+    from db.init_db import init_database
+    from core.config import settings
+except ImportError:
+    print("Warning: Could not import database or config modules")
+    init_database = lambda: None
+    settings = type('Settings', (), {'ENVIRONMENT': 'development'})
 
 app = FastAPI(
     title="GRC AI Backend",
@@ -19,10 +24,10 @@ origins = [
     "https://127.0.0.1:3000",
 ]
 
-if settings.ENVIRONMENT == "production":
+if hasattr(settings, 'ENVIRONMENT') and settings.ENVIRONMENT == "production":
     origins.extend([
         "https://your-app.onrender.com",
-        "https://grc-backend.onrender.com",
+        "https://grc-backend-dzop.onrender.com",
     ])
 
 app.add_middleware(
