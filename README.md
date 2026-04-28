@@ -1,154 +1,217 @@
-# GRC Incident Management System - Backend API
+# 🚀 GRC Incident Management System (AI-Powered Backend)
 
-A comprehensive FastAPI backend for the GRC (Governance, Risk, Compliance) Incident Management System with AI-powered features.
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-green)
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Status](https://img.shields.io/badge/Status-Deployed-brightgreen)
+![License](https://img.shields.io/badge/License-Academic-lightgrey)
 
-## Features
+A production-style AI-powered backend system built using **FastAPI** for Governance, Risk, and Compliance (GRC) Incident Management.
 
-- **Authentication & Authorization**: JWT-based auth with role-based access
-- **Incident Management**: Full CRUD operations with AI classification
-- **Risk Management**: Automated risk scoring and mitigation suggestions
-- **Compliance Tracking**: Policy management and compliance scoring
-- **AI Intelligence**:
-  - Incident severity prediction
-  - Smart incident classification
-  - Automated action suggestions
-  - Risk prediction analytics
-- **Audit Logging**: Complete audit trail for compliance
-- **Reporting**: Generate and export reports
-- **Notifications**: Real-time notification system
+This system integrates:
 
-## Tech Stack
+- Machine Learning (AI predictions)
+- Role-Based Access Control (RBAC)
+- Cloud deployment (Render)
+- Secure authentication system
 
-- **Framework**: FastAPI
-- **Database**: SQLite (easily switchable to PostgreSQL)
-- **ORM**: SQLAlchemy
-- **Authentication**: JWT tokens with bcrypt
-- **AI/ML**: Scikit-learn, spaCy for NLP
-- **Documentation**: Auto-generated Swagger UI
+to simulate a real-world enterprise-grade GRC platform.
 
-## Installation
+---
 
-1. **Create virtual environment**:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# 🌍 Live Deployment
+
+| Service | URL |
+|--------|-----|
+| 🚀 Backend API | https://grc-backend-dzop.onrender.com |
+| 📘 Swagger Docs | https://grc-backend-dzop.onrender.com/docs |
+| 🔗 Base API | https://grc-backend-dzop.onrender.com/api/v1 |
+
+---
+
+# 🏗 System Architecture
+
+```text
+Flutter Frontend
+      ↓
+Dio HTTP Client (JWT Authentication)
+      ↓
+FastAPI Backend (Render Cloud)
+      ↓
+Service Layer (Auth / Incident / Risk / AI)
+      ↓
+SQLAlchemy ORM Layer
+      ↓
+SQLite / PostgreSQL Database
+      ↓
+Machine Learning Models (Scikit-learn + NLP)
 ```
 
-2. **Install dependencies**:
+---
+
+# ✨ Features
+
+## 🔐 Authentication System
+- JWT-based authentication
+- Role-based access control (Admin / Analyst / Auditor)
+- Secure password hashing using bcrypt
+
+## 📊 Incident Management
+- Create / Read / Update / Delete incidents
+- AI-based incident classification
+- Severity prediction system
+
+## ⚠️ Risk Management
+- Automated risk scoring (Probability × Impact)
+- Risk mitigation suggestions
+- Smart risk categorization
+
+## 🤖 AI Intelligence Layer
+- NLP-based incident classification (Phishing / Malware / Breach)
+- Machine learning severity prediction
+- Smart recommendation engine
+
+## 📜 Compliance & Audit
+- Audit logging system
+- Compliance tracking module
+- Activity traceability for all users
+
+---
+
+# 🛠 Tech Stack
+
+- **Backend:** FastAPI  
+- **Database:** SQLite (PostgreSQL ready)  
+- **ORM:** SQLAlchemy  
+- **Authentication:** JWT + bcrypt  
+- **AI/ML:** Scikit-learn, spaCy  
+- **Deployment:** Render Cloud  
+- **API Docs:** Swagger UI  
+
+---
+
+# ⚙️ Setup Instructions
+
+## 1️⃣ Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Download spaCy model** (for NLP):
+---
+
+## 2️⃣ Run Backend Locally
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+## 3️⃣ Install NLP Model (Required for AI features)
 ```bash
 python -m spacy download en_core_web_sm
 ```
 
-## Running the API
+---
 
-Start the development server:
-```bash
-uvicorn main:app --reload
+# 📡 API Endpoints
+
+## 🔐 Authentication
+```
+POST /register
+POST /token
 ```
 
-The API will be available at: `http://127.0.0.1:8000`
+## 📊 Incidents
+```
+GET /incidents
+POST /incidents
+PUT /incidents/{id}
+DELETE /incidents/{id}
+```
 
-## API Documentation
+## ⚠️ Risk Management
+```
+GET /risks
+POST /risks
+```
 
-Visit `http://127.0.0.1:8000/docs` for interactive Swagger UI documentation.
+## 🤖 AI Services
+```
+POST /ai/predict-severity
+POST /ai/classify-incident
+POST /ai/suggest-actions
+```
 
-## Key Endpoints
+## 📊 Dashboard
+```
+GET /dashboard/stats
+```
 
-### Authentication
-- `POST /register` - User registration
-- `POST /token` - Login and get access token
+---
 
-### Incidents
-- `GET /incidents` - List all incidents
-- `POST /incidents` - Create new incident (AI-enhanced)
-- `PUT /incidents/{id}` - Update incident
-- `DELETE /incidents/{id}` - Delete incident
+# 📱 Flutter Integration
 
-### Risks
-- `GET /risks` - List all risks
-- `POST /risks` - Create new risk (AI-scored)
+## ❌ Wrong (Localhost)
+```text
+http://127.0.0.1:8000/incidents
+```
 
-### Compliance
-- `GET /compliance` - List compliance policies
-- `POST /compliance` - Create compliance policy
-
-### AI Features
-- `POST /ai/predict-severity` - Predict incident severity
-- `POST /ai/classify-incident` - Classify incident category
-- `POST /ai/suggest-actions` - Get action recommendations
-
-### Dashboard
-- `GET /dashboard/stats` - Get dashboard statistics
-
-## Database Schema
-
-The system uses the following main tables:
-- `users` - User accounts and roles
-- `incidents` - Security incidents
-- `risks` - Risk assessments
-- `compliance_policies` - Compliance requirements
-- `reports` - Generated reports
-- `notifications` - User notifications
-- `audit_logs` - Audit trail
-
-## AI Features
-
-### Incident Intelligence
-- **Severity Prediction**: Analyzes incident description to predict severity level
-- **Smart Classification**: Automatically categorizes incidents (Phishing, Malware, Breach, etc.)
-- **Action Suggestions**: Provides contextual mitigation steps based on incident type
-
-### Risk Analytics
-- **Automated Scoring**: Calculates risk scores using probability × impact
-- **Mitigation Suggestions**: Recommends specific mitigation strategies
-- **Predictive Analysis**: Identifies high-risk departments based on historical data
-
-## Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Password Hashing**: Bcrypt password encryption
-- **Role-Based Access**: Admin, Risk Manager, Compliance Officer, Employee roles
-- **Audit Logging**: Complete activity tracking for compliance
-
-## Integration with Flutter App
-
-The Flutter app can connect to this API using the `http` package:
-
+## ✅ Correct (Production API)
 ```dart
 final response = await http.get(
-  Uri.parse('http://127.0.0.1:8000/incidents'),
-  headers: {'Authorization': 'Bearer $token'},
+  Uri.parse('https://grc-backend-dzop.onrender.com/api/v1/incidents'),
+  headers: {
+    'Authorization': 'Bearer $token',
+    'Content-Type': 'application/json',
+  },
 );
 ```
 
-## Development
+---
 
-### Adding New AI Features
-1. Extend the `AIService` class in `ai_service.py`
-2. Add new endpoints in `main.py`
-3. Update Pydantic schemas in `schemas.py`
+# 🔐 Security Features
 
-### Database Migrations
-For production, consider using Alembic for database migrations.
+- JWT authentication system  
+- bcrypt password encryption  
+- Role-Based Access Control (RBAC)  
+- Full audit logging system  
 
-### Testing
+---
+
+# ☁️ Deployment
+
+- Hosted on Render Cloud  
+- Auto deployment from GitHub  
+- Environment-based configuration  
+- Production-ready FastAPI setup  
+
+---
+
+# 🧪 Testing
+
 ```bash
 pytest
 ```
 
-## Production Deployment
+---
 
-1. Change `SECRET_KEY` in `auth.py`
-2. Use PostgreSQL instead of SQLite
-3. Set up proper CORS for Flutter app
-4. Configure HTTPS
-5. Set up monitoring and logging
+# 📈 Future Enhancements
 
-## License
+- PostgreSQL migration for scalability  
+- Docker containerization  
+- CI/CD pipeline (GitHub Actions)  
+- Real-time notifications (WebSockets)  
+- Advanced AI models (Deep Learning upgrade)  
+- Monitoring dashboard (Grafana integration)  
 
-This project is part of the GRC Incident Management System major project.
+---
+
+# 🏁 Project Summary
+
+This project is a **full-stack AI-powered GRC system** that demonstrates:
+
+✔ Backend engineering (FastAPI)  
+✔ AI/ML integration (NLP + prediction models)  
+✔ Secure authentication system  
+✔ Cloud deployment (Render)  
+✔ Flutter mobile integration  
+```
